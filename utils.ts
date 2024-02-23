@@ -26,10 +26,33 @@ export function getTitle(html: string): string {
   return title;
 }
 
-export function getReadNowLink(html: string): string {
+export function getReadNowLink(html: string, url: string): string {
   const lines = html.split("\n");
-  const filteredLines = lines.filter((line) =>
-    line.includes("chapter-latest-container")
+  const filteredLines = lines.filter(
+    (line) => line.includes("readchapterbtn") || line.includes("Read Now")
   );
-  return filteredLines.join("\n").split(`"`)[5];
+  let res = filteredLines
+    .join("\n")
+    .replace(/ *.*href="/, "")
+    .replace(/".*/, "");
+  if (res.startsWith("https://")) {
+    return res;
+  } else {
+    return "https://" + url.split("/")[2] + res;
+  }
+}
+
+export function getNextLink(html: string, url: string): string {
+  const lines = html.split("\n");
+  const filteredLines = lines.filter(
+    (line) => line.includes('rel="next"')
+  );
+  let res = filteredLines[0]
+    .replace(/ *.*href="/, "")
+    .replace(/".*/, "");
+  if (res.startsWith("https://")) {
+    return res;
+  } else {
+    return "https://" + url.split("/")[2] + res;
+  }
 }
