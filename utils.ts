@@ -1,20 +1,35 @@
 //@ts-expect-error
-import * as http from 'http';
+import * as http from "http";
 
 export async function downloadHtml(url: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    http.get(url, (res) => {
-      let data = '';
-      res.on('data', (chunk) => {
-        data += chunk;
+    http
+      .get(url, (res) => {
+        let data = "";
+        res.on("data", (chunk) => {
+          data += chunk;
+        });
+        res.on("end", () => {
+          resolve(data);
+        });
+      })
+      .on("error", (err) => {
+        reject(err);
       });
-      res.on('end', () => {
-        resolve(data);
-      });
-    }).on('error', (err) => {
-      reject(err);
-    });
   });
 }
 
-console.log(await downloadHtml("https://example.com"))
+export function getTitle(html: string): string {
+  let startIndex = html.indexOf("<title>");
+  let endIndex = html.indexOf("</title>");
+  let title = html.substring(startIndex + 7, endIndex);
+  return title;
+}
+
+export function removeNonChapterLines(html: string): string {
+  const lines = html.split("\n");
+  const filteredLines = lines.filter((line) =>
+    line.includes("chapter-latest-container")
+  );
+  return filteredLines.join("\n");
+}
