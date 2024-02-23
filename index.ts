@@ -33,10 +33,11 @@ async function recursiveDownload(startURL: string, stop: number) {
     return;
   }
   let page = await downloadHtml(startURL);
-  let title = getTitle(page).split(" ").splice(0, 3).join(" ");
+  let title = getTitle(page).split(" ");
+  title.pop();
   bun.write(
-    `./res/${count} - ${title}.txt`,
-    title + "\n\n" + parseContent(page).trim()
+    `./res/${count} - ${title.join(" ")}.txt`,
+    title.join(" ") + "\n\n" + parseContent(page).trim()
   );
   count++;
   const nextURL = getNextLink(page, url);
