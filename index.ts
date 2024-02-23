@@ -26,13 +26,16 @@ console.log("Getting chapter 1");
 const read_now_link = getReadNowLink(main_page, url);
 console.log("Chapter 1: ", read_now_link);
 
+let count = 1;
 async function recursiveDownload(startURL: string, stop: number){
   if (stop === 0){
     console.log("Reached stop");
     return;
   }
-  const page = await downloadHtml(startURL);
-  bun.write(`./res/${stop}.html`, page);
+  let page = await downloadHtml(startURL);
+  page = page.replace("<z15e0>ʀᴇᴀᴅ ʟᴀᴛᴇsᴛ ᴄʜᴀᴘᴛᴇʀs ᴀᴛ novᴇl(ꜰ)ire.ɴet</z15e0>", "");
+  bun.write(`./res/${count}.html`, page);
+  count++;
   const nextURL = getNextLink(page, url);
   if (nextURL.includes("javascript:;")){
     console.log("No more chapters");
