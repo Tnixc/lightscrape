@@ -12,4 +12,7 @@ This is a cli I wrote to download a whole book from sites like https://lightnove
 bun index.ts https://lightnovelpub.vip/novel/lord-of-the-mysteries-wn-16091313
 ```
 
+## Todo:
 
+1. make compiling epub easier
+2. sort out italics, bold, other markdown parsing.
