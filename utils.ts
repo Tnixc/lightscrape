@@ -81,6 +81,7 @@ export function parseContent(html: string): string {
   }
 
   return content
+    .replace("<z15e0>ʀᴇᴀᴅ ʟᴀᴛᴇsᴛ ᴄʜᴀᴘᴛᴇʀs ᴀᴛ novᴇl(ꜰ)ire.ɴet</z15e0>", "")
     .replace(">", "")
     .replace(/<div.*/, "")
     .replace(/data-mobid.*/, "")
