@@ -26,10 +26,10 @@ export function getTitle(html: string): string {
   return title;
 }
 
-export function removeNonChapterLines(html: string): string {
+export function getReadNowLink(html: string): string {
   const lines = html.split("\n");
   const filteredLines = lines.filter((line) =>
     line.includes("chapter-latest-container")
   );
-  return filteredLines.join("\n");
+  return filteredLines.join("\n").split(`"`)[5];
 }
