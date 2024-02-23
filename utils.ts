@@ -81,12 +81,25 @@ export function parseContent(html: string): string {
   }
 
   return content
-    .replace("<z15e0>ʀᴇᴀᴅ ʟᴀᴛᴇsᴛ ᴄʜᴀᴘᴛᴇʀs ᴀᴛ novᴇl(ꜰ)ire.ɴet</z15e0>", "")
+    .replace(/<z\w+>([\s\S]*?)<\/\w+\/>/gm, "")
+    .replace(/<z\w+>([\s\S]*?)/gm, "")
     .replace(">", "")
     .replace(/<div.*/, "")
     .replace(/data-mobid.*/, "")
-    .replace(/py-2.*/, "")
-    .replace(/Follow.*/, "")
+    .replace(/py-2*.* /, "")
+    .replace(/Follow*.* /, "")
     .replace(/<p>/g, "\n")
     .replace(/<\/p>/g, "\n")
+    .replace(/(?:[^\w.]*)*\bnovels(\b|$)/g, "")
+    .replace(/(.*?)Follow this channel.*/, '$1')
+    .replace(/<i>/g,"*")
+    .replace(/<\/i>/g,"* ")
+    .replace(/<b>/g, "**")
+    .replace(/<\/b>/g, "** ")
+    .replace(/<em>/g, "*")
+    .replace(/<\/em>/g, "* ")
+    .replace(/<strong>/g, "**")
+    .replace(/<\/strong>/g, "** ")
+    .replace(/<h4>/g, "#### ")
+    .replace(/<\/h4>/g, "")
 }

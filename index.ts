@@ -36,7 +36,7 @@ async function recursiveDownload(startURL: string, stop: number) {
   let title = getTitle(page).split(" ");
   title.pop();
   bun.write(
-    `./res/${count} - ${title.join(" ")}.txt`,
+    `./res/${count} - ${title.join(" ")}.md`,
     title.join(" ") + "\n\n" + parseContent(page).trim()
   );
   count++;
