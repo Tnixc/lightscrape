@@ -4,6 +4,7 @@ import {
   getTitle,
   getReadNowLink,
   getNextLink,
+  parseContent
 } from "./utils";
 
 
@@ -34,7 +35,7 @@ async function recursiveDownload(startURL: string, stop: number){
   }
   let page = await downloadHtml(startURL);
   page = page.replace("<z15e0>ʀᴇᴀᴅ ʟᴀᴛᴇsᴛ ᴄʜᴀᴘᴛᴇʀs ᴀᴛ novᴇl(ꜰ)ire.ɴet</z15e0>", "");
-  bun.write(`./res/${count}.html`, page);
+  bun.write(`./res/${count}.html`, parseContent(page).trim());
   count++;
   const nextURL = getNextLink(page, url);
   if (nextURL.includes("javascript:;")){
