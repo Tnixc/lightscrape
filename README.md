@@ -5,9 +5,8 @@ This is a cli I wrote to download a whole book from sites like https://lightnove
 ## To use:
 
 1. Clone the repo
-2.Make sure the link you copy is from the main page.
-
-
+2. Make sure the link you copy is from the main page.
+3. Run `bun index.ts` followed by the link you copied.
 ```sh
 bun index.ts https://lightnovelpub.vip/novel/lord-of-the-mysteries-wn-16091313
 ```
